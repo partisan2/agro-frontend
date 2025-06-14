@@ -1,4 +1,4 @@
-import { useState,useEffect} from 'react'
+import { useState} from 'react'
 import axios from "../axiosInstance";
 import CropDisplay from './CropDisplay';
 const crops = [
@@ -19,37 +19,36 @@ const Search = () => {
     const [cropClimate,setCropClimate] = useState()
     const [cropVariety,setVariety] = useState()
     const [cropPest,setCropPest] = useState()
-    
-    useEffect(()=>{
-      getCropEstablishment()
-      getCropClimate()
-      getCropDisease()
-      getCropFerilizer()
-      getCropHarvesting()
-      getCropPest()
-      getCropVariety()
-    },[cropData])
+    const [cropPrice,setCropPrice]=useState()
+    const [loans,setLoans] = useState()
+    const [loading, setLoading] = useState(false);
 
-    const handleCropSearch = async () =>{
-      if(selectedCropId){
-        try{
-          const response = await axios.get(
-            '/crop',
-            {
-              params: { cropId: selectedCropId }
-            }
-          )
-          if (response.status === 200) {
-            // console.log("Crop fetched successfully:", response.data);
-            setCropData(response.data)
-          }
-        }catch(error){
-          console.log("Get crop details", error);
-        }
-      }else{
-        alert("Select Crop")
+  const handleCropSearch = async () => {
+    if (!selectedCropId) return alert("Select Crop");
+    setLoading(true);
+    try {
+      const response = await axios.get('/crop', { params: { cropId: selectedCropId } });
+      if (response.status === 200) {
+        setCropData(response.data);
+        // Parallel fetching
+        getCropEstablishment();
+        getCropClimate();
+        getCropDisease();
+        getCropFerilizer();
+        getCropHarvesting();
+        getCropPest();
+        getCropVariety();
+        getCropPrice();
+        getLoans();
       }
+    } catch (error) {
+      console.log("Get crop details", error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+
 
     const getCropEstablishment = async () =>{
         try{
@@ -169,40 +168,78 @@ const Search = () => {
         }
     }
 
+    const getCropPrice = async () =>{
+          try{
+            const response = await axios.get(
+              '/price',
+              {
+                params: { cropId: selectedCropId }
+              }
+            )
+            if (response.status === 200) {
+              // console.log("Crop price fetched successfully:", response.data);
+              setCropPrice(response.data)
+            }
+          }catch(error){
+            console.log("Get crop details", error);
+          }
+      }
 
+      const getLoans = async () =>{
+          try{
+            const response = await axios.get(
+              '/loan-scheme',
+              {
+                params: { cropId: selectedCropId }
+              }
+            )
+            if (response.status === 200) {
+              // console.log("loans fetched successfully:", response.data);
+              setLoans(response.data)
+            }
+          }catch(error){
+            console.log("Get loan details", error);
+          }
+      }
 
   return (
     <div className=' h-[100vh]'>
-      <div className=''>
-        <h2 className="text-2xl font-bold text-center mb-10">Search Your Requirements</h2>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-          <div className="space-y-4 w-full max-w-md">
-            <div>
-              <label className="block font-medium">Select a Crop</label>
-              <select
-                className="w-full mt-1 p-2 border rounded"
-                value={selectedCropId}
-                onChange={(e) => setSelectedCropId(e.target.value)}
-              >
-                <option value="">Select</option>
-                {crops.map((crop) => (
-                  <option key={crop.id} value={crop.id}>
-                    {crop.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className='flex justify-center'>
-                <button 
-                className='px-3 py-2 bg-green-600 text-white rounded-md'
-                onClick={handleCropSearch}>Search</button>
+      <div className={`flex justify-center items-center ${cropData ? '':'h-full' }`}>
+        <div className='mt-6 py-8 px-20 backdrop-opacity-10 bg-green-50 rounded-lg shadow-lg'>
+          <h2 className="text-2xl font-bold text-center mb-10">Search Your Requirements</h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10">
+            <div className="space -y-4 w-full max-w-md">
+              <div>
+                <label className="block font-medium">Select a Crop</label>
+                <select
+                  className="w-full mt-1 p-2 border rounded"
+                  value={selectedCropId}
+                  onChange={(e) => setSelectedCropId(e.target.value)}
+                >
+                  <option value="">Select</option>
+                  {crops.map((crop) => (
+                    <option key={crop.id} value={crop.id}>
+                      {crop.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className='flex justify-center py-4 '>
+                  <button 
+                    className='px-3 py-2 bg-green-600 text-white rounded-md'
+                    onClick={handleCropSearch}
+                    disabled={loading}
+                  >
+                    {loading ? "Searching..." : "Search"}
+                  </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       {cropData ?
-        <CropDisplay cropData={cropData} cropDisease={cropDisease} cropFertilizer={cropFertilizer} climate={cropClimate} cropEst={cropEstData} cropHarvesting={cropHarvesting} variety={cropVariety} pest={cropPest}/>
-        : ''
+        <CropDisplay cropData={cropData} cropDisease={cropDisease} cropFertilizer={cropFertilizer} climate={cropClimate} cropEst={cropEstData} cropHarvesting={cropHarvesting} variety={cropVariety} pest={cropPest} price={cropPrice} loans={loans}/>
+        : '' 
       }
     </div>
   )

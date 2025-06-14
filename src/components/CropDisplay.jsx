@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting,climate,variety,pest}) => {
+const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting,climate,variety,pest,price,loans}) => {
     // console.log(cropEst)
   return (
     <Box sx={{ p: 4, mt: 4 }}>
@@ -29,34 +29,34 @@ const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting
       {/* Climate Requirements Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Climate Requirements
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className='flex justify-center'>
           {climate?.map((cl) => (
-            <Box key={cl.id} mb={4}>
-              <Typography variant="subtitle1" fontWeight="medium">
+            <Box key={cl.id} mb={4} width={6/7}>
+              <Typography variant="subtitle1" fontWeight="bold">
                 Climatic Requirement
               </Typography>
-              <Typography paragraph>{cl.climatic_requirement}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{cl.climatic_requirement}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Altitude Range
               </Typography>
-              <Typography paragraph>{cl.altitude_range}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{cl.altitude_range}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Soil Type
               </Typography>
-              <Typography paragraph>{cl.soil_type}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{cl.soil_type}</Typography>
 
               {cl.soil_pH_range && (
                 <>
-                  <Typography variant="subtitle1" fontWeight="medium">
+                  <Typography variant="subtitle1" fontWeight="bold">
                     Soil pH Range
                   </Typography>
-                  <Typography paragraph>{cl.soil_pH_range}</Typography>
+                  <Typography style={{padding:'6px', fontWeight:'lighter'}}>{cl.soil_pH_range}</Typography>
                 </>
               )}
             </Box>
@@ -67,47 +67,47 @@ const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting
       {/* Crop Establishment Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Crop Establishment
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className='flex justify-center'>
           {cropEst?.map((est, index) => (
-            <Box key={index} mb={3}>
-              <Typography variant="subtitle1" fontWeight="medium">
+            <Box key={index} mb={3} width={6/7}>
+              <Typography variant="subtitle1" fontWeight="bold">
                 Field Preparation
               </Typography>
-              <Typography paragraph>{est.field_preparation}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.field_preparation}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Nursery Practices
               </Typography>
-              <Typography paragraph>{est.nursery_practices}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.nursery_practices}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Other Practices
               </Typography>
-              <Typography paragraph>{est.other_practices}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.other_practices}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Planting Material
               </Typography>
-              <Typography paragraph>{est.planting_material}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.planting_material}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Planting Method
               </Typography>
-              <Typography paragraph>{est.planting_method}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.planting_method}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Pre Planting Treatment
               </Typography>
-              <Typography paragraph>{est.pre_planting_treatment}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.pre_planting_treatment}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Spacing
               </Typography>
-              <Typography paragraph>{est.spacing}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{est.spacing}</Typography>
 
               <Divider sx={{ mt: 2 }} />
             </Box>
@@ -118,27 +118,27 @@ const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting
       {/* Fertilizer Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Fertilizer
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className='flex justify-center'>
           {cropFertilizer?.map((item, index) => (
-            <Box key={index} mb={3}>
-              <Typography variant="h6">Basal Application</Typography>
-              <Typography paragraph>{item.basal_application}</Typography>
+            <Box key={index} mb={3} width={6/7}>
+              <Typography variant="subtitle1" fontWeight="bold">Basal Application</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{item.basal_application}</Typography>
 
-              <Typography variant="h6">Fertilizer Mix</Typography>
-              <Typography paragraph>{item.fertilizer_mix}</Typography>
+              <Typography variant="subtitle1" fontWeight="bold">Fertilizer Mix</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{item.fertilizer_mix}</Typography>
 
-              <Typography variant="h6">Organic Fertilizer</Typography>
-              <Typography paragraph>{item.organic_fertilizer}</Typography>
+              <Typography variant="subtitle1" fontWeight="bold">Organic Fertilizer</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{item.organic_fertilizer}</Typography>
 
-              <Typography variant="h6">Remarks</Typography>
-              <Typography paragraph>{item.remarks}</Typography>
+              <Typography variant="subtitle1" fontWeight="bold">Remarks</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{item.remarks}</Typography>
 
-              <Typography variant="h6">Subsequent Applications</Typography>
-              <Typography paragraph>{item.subsequent_applications}</Typography>
+              <Typography variant="subtitle1" fontWeight="bold">Subsequent Applications</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{item.subsequent_applications}</Typography>
             </Box>
           ))}
         </AccordionDetails>
@@ -146,101 +146,126 @@ const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting
       {/* Pests Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Pests
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className="flex justify-center">
+        <div className="w-4/5 mx-auto">
           {pest?.map((p) => (
-            <Box key={p.id} mb={4}>
-              <Typography variant="subtitle1" fontWeight="medium">
+            <Box key={p.id} mb={2}>
+              <Typography variant="subtitle1" fontWeight="bold">
                 Pest Name
               </Typography>
-              <Typography paragraph>{p.pest_name}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>{p.pest_name}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Scientific Name
               </Typography>
-              <Typography paragraph>{p.scientific_name}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>{p.scientific_name}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Description
               </Typography>
-              <Typography paragraph>{p.description}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>{p.description}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Damage
               </Typography>
-              <Typography paragraph>{p.damage}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>{p.damage}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Control Measures
               </Typography>
-              <Typography paragraph>{p.control_measures}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>{p.control_measures}</Typography>
+               <img
+                src={`http://localhost:4000${p.image_path}`} 
+                alt={p.pest_name}
+                style={{ maxWidth: "300px", height: "auto" }}
+              />
+              <hr />
             </Box>
           ))}
-        </AccordionDetails>
+        </div>
+      </AccordionDetails>
+
       </Accordion>
 
       {/* Crop Diseases Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Crop Diseases
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className="flex justify-center">
+        <div className="w-4/5 mx-auto">
           {cropDisease?.map((disease) => (
             <Box key={disease.id} mb={4}>
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Disease Name
               </Typography>
-              <Typography paragraph>{disease.disease_name}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>
+                {disease.disease_name}
+              </Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Causal Agent
               </Typography>
-              <Typography paragraph>{disease.causal_agent}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>
+                {disease.causal_agent}
+              </Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Symptoms
               </Typography>
-              <Typography paragraph>{disease.symptoms}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>
+                {disease.symptoms}
+              </Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Control Measures
               </Typography>
-              <Typography paragraph>{disease.control_measures}</Typography>
+              <Typography style={{ padding: '6px', fontWeight: 'lighter' }}>
+                {disease.control_measures}
+              </Typography>
+               <img
+                src={`http://localhost:4000${disease.image_path}`} 
+                alt={disease.disease_name}
+                style={{ maxWidth: "300px", height: "auto" }}
+              />
               <hr />
             </Box>
           ))}
-        </AccordionDetails>
+        </div>
+      </AccordionDetails>
+
       </Accordion>
 
       {/* Harvesting Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Harvesting
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className='flex justify-center'>
           {cropHarvesting?.map((harvest) => (
-            <Box key={harvest.id} mb={4}>
-              <Typography variant="subtitle1" fontWeight="medium">
+            <Box key={harvest.id} mb={4} width={6/7}>
+              <Typography variant="subtitle1" fontWeight="bold" >
                 Harvesting Time
               </Typography>
-              <Typography paragraph>{harvest.harvesting_time}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{harvest.harvesting_time}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Harvesting Method
               </Typography>
-              <Typography paragraph>{harvest.harvesting_method}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{harvest.harvesting_method}</Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
+              <Typography variant="subtitle1" fontWeight="bold">
                 Post-Harvest Practices
               </Typography>
-              <Typography paragraph>{harvest.post_harvest_practices}</Typography>
+              <Typography style={{padding:'6px', fontWeight:'lighter'}}>{harvest.post_harvest_practices}</Typography>
             </Box>
           ))}
         </AccordionDetails>
@@ -250,33 +275,107 @@ const CropDisplay = ({cropData,cropEst,cropFertilizer,cropDisease,cropHarvesting
       {/* Varieties Accordion */}
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant="h5" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
             Varieties
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          {variety?.map((varie) => (
-            <Box key={varie.id} mb={4}>
-              <Typography variant="subtitle1" fontWeight="medium">
-                Variety Name
-              </Typography>
-              <Typography paragraph>{varie.variety_name}</Typography>
+        <AccordionDetails className="flex justify-center">
+          <div className="w-4/5 mx-auto">
+            {variety?.map((varie) => (
+              <Box key={varie.id} mb={4}>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Variety Name
+                </Typography>
+                <Typography style={{ paddingLeft: '6px', fontWeight: 'lighter' }}>
+                  {varie.variety_name}
+                </Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
-                Characteristics
-              </Typography>
-              <Typography paragraph>{varie.characteristics}</Typography>
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Characteristics
+                </Typography>
+                <Typography style={{ paddingLeft: '6px', fontWeight: 'lighter' }}>
+                  {varie.characteristics}
+                </Typography>
 
-              <Typography variant="subtitle1" fontWeight="medium">
-                Yield
-              </Typography>
-              <Typography paragraph>{varie.yield}</Typography>
-            </Box>
-          ))}
+                <Typography variant="subtitle1" fontWeight="bold">
+                  Yield
+                </Typography>
+                <Typography style={{ paddingLeft: '6px', fontWeight: 'lighter' }}>
+                  {varie.yield}
+                </Typography>
+                <hr />
+              </Box>
+            ))}
+          </div>
         </AccordionDetails>
       </Accordion>
-
-      
+      {/* Prices Accordion */}
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="h5" fontWeight="bold" style={{paddingLeft: '10px'}}>
+            Prices
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="overflow-x-auto w-full">
+            <table className="min-w-full text-left">
+              <thead className="bg-green-100 rounded-t-lg">
+                <tr className=''>
+                  <th className="px-4 py-2 ">Crop Name</th>
+                  <th className="px-4 py-2 ">District</th>
+                  <th className="px-4 py-2 ">Date</th>
+                  <th className="px-4 py-2 ">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {price?.map((item) => (
+                  <tr key={item.price_id} className="hover:bg-green-50">
+                    <td className="px-4 py-2 ">{item.crop_name}</td>
+                    <td className="px-4 py-2 ">{item.district}</td>
+                    <td className="px-4 py-2 ">
+                      {new Date(item.date).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-2 ">{item.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography variant="h5" fontWeight="bold" style={{ paddingLeft: '10px' }}>
+            Loan Schemes
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <div className="overflow-x-auto w-full">
+            <table className="min-w-full text-left">
+              <thead className="bg-green-100">
+                <tr>
+                  <th className="px-4 py-2">Scheme Name</th>
+                  <th className="px-4 py-2">Provider</th>
+                  <th className="px-4 py-2">Interest Rate</th>
+                  <th className="px-4 py-2">Max Amount</th>
+                  <th className="px-4 py-2">Eligibility</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loans?.map((loan) => (
+                  <tr key={loan.loan_id} className="hover:bg-green-50">
+                    <td className="px-4 py-2">{loan.scheme_name}</td>
+                    <td className="px-4 py-2">{loan.provider}</td>
+                    <td className="px-4 py-2">{loan.interest_rate}</td>
+                    <td className="px-4 py-2">{loan.maximum_amount}</td>
+                    <td className="px-4 py-2">{loan.eligibility_criteria}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </AccordionDetails>
+      </Accordion>
     </Box>
   )
 }
